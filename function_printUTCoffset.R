@@ -3,6 +3,7 @@
 # Calculates UTC offset from system time and prints
 
 current_utc_offset <- function () {
+  library(lubridate)
   library(tidyr)
   time_frame <- data.frame(
     now_timestamp = as.character(Sys.time()),
