@@ -1,0 +1,14 @@
+##### FUNCTION
+
+# Calculates UTC offset from system time and prints
+
+current_utc_offset <- function () {
+  library(tidyr)
+  time_frame <- data.frame(
+    now_timestamp = as.character(Sys.time()),
+    utc_timestamp = as.character(as_datetime(Sys.time(), tz = "UTC")))
+  time_frame$hours = with(time_frame, difftime(now_timestamp, utc_timestamp, units = "hours"))
+  time_frame$hours <- as.numeric(time_frame$hours*1000)
+  current <- unite(time_frame, print_time, c("now_timestamp", "hours"), sep = "")
+  return(current$print_time)
+}
